@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const { dist } = require('../config');
 
 exports.getIndex = async ctx => {
-  console.log(path.resolve(path.join('dist', 'index.html')));
-  ctx.body = fs.readFileSync(path.resolve(path.join('dist', 'index.html')), 'utf8');
+  ctx.body = fs.createReadStream(path.join(dist, 'index.html'), { encoding: 'utf8' });
 };

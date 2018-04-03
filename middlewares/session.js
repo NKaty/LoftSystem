@@ -1,15 +1,7 @@
-// const session = require('koa-generic-session');
-// const config = require('../config');
-//
-// exports.init = app => {
-//   app.keys = [config.session.secret];
-//   app.use(session(config.session.settingsGS));
-// };
+const koaSession = require('koa-generic-session');
+const store = require('../libs/sessionStore');
+const { session } = require('../config');
+const convert = require('koa-convert');
 
-const session = require('koa-session');
-const config = require('../config');
-
-exports.init = app => {
-  app.keys = [config.session.secret];
-  app.use(session(config.session.settingsS, app));
-};
+session.settings.store = store;
+exports.init = app => app.use(convert(koaSession(session.settings)));

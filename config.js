@@ -1,53 +1,56 @@
 const path = require('path');
 
 const config = {
-  mail: {
-    subject: 'Сообщение с сайта',
-    smtp: {
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: 'webinar.loftschool@gmail.com',
-        pass: ''
-      }
+  mongoose: {
+    uri: 'mongodb://localhost/LoftSystem',
+    options: {
+      keepAlive: 1,
+      poolSize: 5
     }
   },
   session: {
-    settingsGS: {
-      key: 'key',
-      rolling: false,
+    settings: {
+      key: 'sid',
       cookie: {
-        path: '/',
         httpOnly: true,
-        maxAge: null,
+        path: '/',
         overwrite: true,
-        signed: true
-      }
-    },
-    settingsS: {
-      key: 'key',
-      overwrite: true,
-      signed: true,
-      httpOnly: true,
-      maxAge: null,
-      rolling: false,
-      renew: false
+        signed: false,
+        maxAge: 5000//3600 * 4 * 1e3
+      },
+      rolling: true
     },
     secret: 'keyboard cat'
   },
+  redis: {
+    host: 'localhost',
+    port: 6379
+  },
   server: {
-    port: process.env.PORT || 3001
+    port: process.env.PORT || 3002
   },
   upload: {
     formidable: {
-      uploadDir: `${path.join(process.cwd(), 'public', 'images', 'products')}`,
-      multiples: false
+      uploadDir: `${path.join(process.cwd(), 'dist', 'uploads')}`,
+      multiples: false,
+      keepExtensions: true
     },
     multipart: true
   },
-  middleware: ['static', 'logger', 'errors', 'bodyParser', 'session'],
-  root: process.cwd()
+  crypto: {
+    hash: {
+      length: 64,
+      iterations: process.env.NODE_ENV === 'production' ? 12000 : 1
+    }
+  },
+  defaultPermission: {
+    chat: {C: true, R: true, U: true, D: true},
+    news: {C: true, R: true, U: true, D: true},
+    setting: {C: true, R: true, U: true, D: true}
+  },
+  middleware: ['favicon', 'static', 'logger', 'errors', 'bodyParser', 'session', 'passportInit', 'passportSession'],
+  root: process.cwd(),
+  dist: `${path.join(process.cwd(), 'dist')}`
 };
 
 module.exports = config;

@@ -1,6 +1,7 @@
 const winston = require('winston');
 const path = require('path');
 const fs = require('fs');
+const { root } = require('../config');
 
 winston.emitErrs = true;
 
@@ -28,7 +29,7 @@ const getLogger = (module) => {
       ]
     });
   } else {
-    const logDir = path.join(process.cwd(), 'logs');
+    const logDir = path.join(root, 'logs');
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir);
     }
