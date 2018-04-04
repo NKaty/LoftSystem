@@ -11,14 +11,14 @@ const permissionApi = require('../controllers/permissionApi');
 const newsApi = require('../controllers/newsApi');
 const { multipart } = require('../middlewares/bodyParser');
 
-// До проверки isAuthenticated - иначе пользователи не смогут войти на сайт и выйти
+// До проверки isAuthenticated - иначе пользователи не смогут войти на сайт
 router.post('/api/login', login.post);
 router.post('/api/saveNewUser', userApi.post);
-router.post('/api/logout', logout.post);
 
 router.use('/*', isAuthenticated);
 
 router.post('/api/authFromToken', loginFromToken.post);
+router.post('/api/logout', logout.post);
 
 router.get('/api/getUsers', userApi.get);
 router.post('/api/saveUserImage/:id', userApi.checkDir, multipart, userApi.checkId, userApi.postImage);

@@ -8,7 +8,7 @@ winston.emitErrs = true;
 const getLogger = (module) => {
   const modulePath = module.filename.split('/').slice(-2).join('/');
   let info, error;
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'development') {
     info = new winston.Logger({
       level: 'info',
       transports: [

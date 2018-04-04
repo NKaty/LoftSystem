@@ -2,11 +2,15 @@ const path = require('path');
 
 const config = {
   mongoose: {
-    uri: 'mongodb://localhost/LoftSystem',
+    uri: process.env.NODE_ENV === 'production' ? 'mongodb://xxx:xxx@ds129386.mlab.com:29386/loftsystem' : 'mongodb://localhost/LoftSystem',
     options: {
       keepAlive: 1,
       poolSize: 5
     }
+  },
+  ratelimit: {
+    duration: 60000,
+    max: 100
   },
   session: {
     settings: {
@@ -16,15 +20,16 @@ const config = {
         path: '/',
         overwrite: true,
         signed: false,
-        maxAge: 5000//3600 * 4 * 1e3
+        maxAge: 3600 * 4 * 1e3
       },
       rolling: true
     },
     secret: 'keyboard cat'
   },
   redis: {
-    host: 'localhost',
-    port: 6379
+    host: process.env.NODE_ENV === 'production' ? 'redis-10950.c44.us-east-1-2.ec2.cloud.redislabs.com' : 'localhost',
+    port: process.env.NODE_ENV === 'production' ? 10950 : 6379,
+    password: process.env.NODE_ENV === 'production' ? 'xxx' : ''
   },
   server: {
     port: process.env.PORT || 3002
@@ -48,7 +53,7 @@ const config = {
     news: {C: true, R: true, U: true, D: true},
     setting: {C: true, R: true, U: true, D: true}
   },
-  middleware: ['favicon', 'static', 'logger', 'errors', 'bodyParser', 'session', 'passportInit', 'passportSession'],
+  middleware: ['helmet', 'ratelimit', 'favicon', 'static', 'logger', 'errors', 'bodyParser', 'session', 'passportInit', 'passportSession'],
   root: process.cwd(),
   dist: `${path.join(process.cwd(), 'dist')}`
 };

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=dev MONGOOSE_DEBUG=1 nodemon app.js",
-    "debug": "NODE_ENV=dev MONGOOSE_DEBUG=1 nodemon --inspect-brk app.js",
-    "prod": "NODE_ENV=prod node app.js"
+    "start": "NODE_ENV=develepment MONGOOSE_DEBUG=1 nodemon app.js",
+    "debug": "NODE_ENV=develepment MONGOOSE_DEBUG=1 nodemon --inspect-brk app.js",
+    "trace": "NODE_ENV=develepment TRACE=1 MONGOOSE_DEBUG=1 nodemon",
+    "prod": "NODE_ENV=production node app.js"
   },
   "dependencies": {
     "clarify": "^2.1.0",
@@ -19,9 +20,11 @@
     "koa-favicon": "^2.0.1",
     "koa-generic-session": "^1.11.3",
     "koa-generic-session-mongo": "^0.4.0",
+    "koa-helmet": "^4.0.0",
     "koa-morgan": "^1.0.1",
     "koa-passport": "^4.0.1",
     "koa-router": "^7.4.0",
+    "koa-simple-ratelimit": "^2.4.1",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
     "mongoose": "^5.0.11",

@@ -18,6 +18,7 @@ function socket (server) {
     co(function * () {
       let session = yield * sessionStore.get(sid);
       if (!session) {
+        socket.disconnect();
         throw new Error('Ваша сессия истекла. Перезайдите в приложение.');
       }
       socket.user = yield User.findById(session.passport.user);
@@ -67,6 +68,7 @@ function socket (server) {
       logInfo('disconnected');
       delete users[socket.id];
       socket.broadcast.emit('delete user', socket.id);
+      socket.disconnect();
     });
 
     socket.on('error', (err) => {
