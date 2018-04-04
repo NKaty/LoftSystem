@@ -2,6 +2,9 @@
   "name": "LoftSystem",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "9.6.1"
+  },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "development": "NODE_ENV=develepment MONGOOSE_DEBUG=1 nodemon app.js",
