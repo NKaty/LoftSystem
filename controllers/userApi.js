@@ -75,7 +75,6 @@ exports.put = async function (ctx, next) {
   if (ctx.request.body.oldPassword && ctx.request.body.password) {
     if (!ctx.userById.checkPassword(ctx.request.body.oldPassword)) {
       ctx.throw(400, 'Старый пароль неверен.');
-      return;
     }
   }
 

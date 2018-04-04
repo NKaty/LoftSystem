@@ -2,7 +2,7 @@ const path = require('path');
 
 const config = {
   mongoose: {
-    uri: process.env.NODE_ENV === 'production' ? 'mongodb://xxx:xxx@ds129386.mlab.com:29386/loftsystem' : 'mongodb://localhost/LoftSystem',
+    uri: process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost/LoftSystem',
     options: {
       keepAlive: 1,
       poolSize: 5
@@ -24,13 +24,9 @@ const config = {
       },
       rolling: true
     },
-    secret: 'keyboard cat'
+    secret: process.env.NODE_ENV === 'production' ? process.env.SECRET : 'keyboard cat'
   },
-  redis: {
-    host: process.env.NODE_ENV === 'production' ? 'redis-10950.c44.us-east-1-2.ec2.cloud.redislabs.com' : 'localhost',
-    port: process.env.NODE_ENV === 'production' ? 10950 : 6379,
-    password: process.env.NODE_ENV === 'production' ? 'xxx' : ''
-  },
+  redis: process.env.NODE_ENV === 'production' ? process.env.REDISDB_URI : 'redis://localhost:6379',
   server: {
     port: process.env.PORT || 3002
   },
