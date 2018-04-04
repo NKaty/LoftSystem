@@ -78,7 +78,7 @@ function socket (server) {
 }
 
 const socketEmitter = require('socket.io-emitter');
-const redisClient = require('redis').createClient();
+const redisClient = require('redis').createClient(config.redis);
 socket.emitter = socketEmitter(redisClient);
 
 module.exports = socket;
