@@ -12,6 +12,7 @@
     "trace": "NODE_ENV=develepment TRACE=1 MONGOOSE_DEBUG=1 nodemon index.js"
   },
   "dependencies": {
+    "chai": "^4.1.2",
     "clarify": "^2.1.0",
     "co": "^4.6.0",
     "cookies": "^0.7.1",
@@ -30,12 +31,15 @@
     "koa-simple-ratelimit": "^2.4.1",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
+    "mocha": "^5.0.5",
     "mongoose": "^5.0.11",
     "mongoose-beautiful-unique-validation": "^7.1.1",
     "mongoose-unique-validator": "^2.0.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "redis": "^2.8.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
     "socket.io": "^2.1.0",
     "socket.io-emitter": "^3.1.1",
     "socket.io-redis": "^5.2.0",
