@@ -36,15 +36,4 @@ newsSchema.methods.getPublicFields = function () {
 
 newsSchema.statics.clientFields = ['theme', 'text', 'date', 'userId'];
 
-// const User = mongoose.model('User', userSchema);
-
-// async function f () {
-//   const permission = await Permission.create(config.defaultPermission);
-//   await permission.save();
-//   const user = await User.create({username: 'tot', password: '1111', access_token: '111111'});
-//   user.permission = permission;
-//   await user.save();
-// }
-// f();
-
 module.exports = mongoose.model('News', newsSchema);
